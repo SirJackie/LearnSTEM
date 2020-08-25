@@ -3,101 +3,34 @@
   3  Li  锂  Lithum
   4  Be  铍  Beryllium
   5  B   硼  Boron
+
   6  C   碳  Carbon
   7  N   氮  Nitrogen
   8  O   氧  Oxygen
   9  F   氟  Fluorine
  10  Ne  氖  Neon
- 11  Na  钠  Natrium   (Latin)
+
+ 11  Na  钠  Natrium         (Latin)
  12  Mg  镁  Magnesium
  13  Al  铝  Aluminium
  14  Si  硅  Silicon
  15  P   磷  Phosphorus
+
  16  S   硫  Sulfur
  17  Cl  氯  Chlorlne
  18  A   氩  Argon
- 19  K   钾  Kalium   (Latin)
+ 19  K   钾  Kalium          (Latin)
  20  Ca  钙  Calcium
- 21  Sc  钪  Scandium
- 22  Ti  钛  Titanium
- 23  V   钡  Vanadium
- 24  Cr  铬  Chromium
- 25  Mn  锰  Manganum
- 26  Fe  铁  Ferrum   (Latin)
- 27  Co  钴  Cobalt
- 28  Ni  镍  Nickel
+
+ 79  Au  金  Aurum           (Latin)
+ 47  Ag  银  Argentum        (Latin)
  29  Cu  铜  Copper
+ 26  Fe  铁  Ferrum          (Latin)
  30  Zn  锌  Zinc
- 31  Ga  镓  Gallium
- 32  Ge  锗  Germanium
- 33  As  砷  Arsenic
- 34  Se  硒  Selenium
- 35  Br  溴  Bormine
- 36  Kr  氪  Krypton
- 37  Rb  铷  Rubidium
- 38  Sr  锶  Strontium
- 39  Y   钇  Yttrium
- 40  Zr  钴  Zirconium
- 41  Nb  铌  Niobium
- 42  Mo  钼  Molybdanium
- 43  Tc  锝  Technetium
- 44  Ru  钌  Ruthenium
- 45  Rh  铑  Rhodium
- 46  Pd  钯  Palladium
- 47  Ag  银  Argentum   (Latin)
- 48  Cd  镉  Cadmium
- 49  In  铟  Inlium
- 50  Sn  锡  Stannum   (Latin)
- 51  Sb  锑  Stibium   (Latin)
- 52  Te  碲  Tellurium
- 53  I   碘  Iodine
- 54  Xe  氙  Xenon
- 55  Cs  铯  Caesium
- 56  Ba  钡  Barium
- 57  La  镧  Lanthanum
- 58  Ce  铈  Cerium
- 59  Pr  镨  Praseodymium
- 60  Nd  钕  Neodymium
- 61  Pm  钷  Promethium
- 62  Sm  钐  Samarium
- 63  En  铕  Europinu
- 64  Gd  钆  Gadolinium
- 65  Tb  铽  Terbium
- 66  Dy  镝  Dysprosium
- 67  Ho  钬  Holmium
- 68  Er  铒  Erbium
- 69  Tm  铥  Thulium
- 70  Yb  镱  Ytterbium
- 71  Lu  镥  Lrtetium
- 72  Hf  铪  Hafnium
- 73  Ta  钽  Tantalum
- 74  W   钨  Wolfram   (Latin)
- 75  Re  铼  Rhenium
- 76  Os  锇  Osmium
- 77  Ir  铱  I
+
+ 23  V   钡  Vanadium
  78  Pt  铂  Platinum
- 79  Au  金  Aurum   (Latin)
- 80  Hg  汞  Hydrargyrum   (Latin)
- 81  Tl  铊  Thallium
- 82  Pb  铅  Plumbum   (Latin)
- 83  Bi  铋  Bismuth
- 84  Po  钋  Polonium
- 85  At  砹  Astatium
- 86  Rn  氡  Radon
- 87  Fr  钫  Franium
- 88  Ra  镭  Radium
- 89  Ac  锕  Actinium
- 90  Th  钍  Thorium
- 91  Pa  镤  Protactinium
- 92  U   铀  Uranium
- 93  Np  镎  Neptunium
- 94  Pu  钚  Plutonium
- 95  Am  镅  Americium
- 96  Cm  锔  Curkelium
- 97  Bk  锫  Berkelium
- 98  Cf  锎  Californium
- 99  Es  镶  Einsteinium
-100  Fm  镄  Fermim
-101  Md  钔  Mendelevium
-102  No  锘  Nobelium
-103  Lr  铹  Lawrencium
+ 25  Mn  锰  Manganum
+ 80  Hg  汞  Hydrargyrum     (Latin)
+ 53  I   碘  Iodine
+

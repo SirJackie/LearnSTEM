@@ -132,6 +132,10 @@ for i in range(len(table_lines)):
 print(table_lines)
 
 
+def SpacesForLineUp(str):
+    return " " * (16 - len(str))
+
+
 #
 # Output The Table
 #
@@ -162,11 +166,21 @@ def OutputThisElement(input, element):
         result += "\n"
     else:
         result += element[3]
-        result += "   (Latin)"
+        result += SpacesForLineUp(element[3])
+        result += "(Latin)"
         result += "\n"
 
     return result
 
+def TableSearch(table, chinese_name):
+    for i in range(len(table)):
+        if table[i][2] == chinese_name:
+            return table[i]
+    raise ValueError("Can not find the fitting element in the table.")
+    return None
+
+def AddEmptyLine(input):
+    return input + "\n"
 
 #
 # Start Outputting
@@ -174,8 +188,35 @@ def OutputThisElement(input, element):
 
 outs = ""
 
-for i in range(0, 103):
+for i in range(0, 5):
     outs = OutputThisElement(outs, table_lines[i])
+outs = AddEmptyLine(outs)
+
+for i in range(5, 10):
+    outs = OutputThisElement(outs, table_lines[i])
+outs = AddEmptyLine(outs)
+
+for i in range(10, 15):
+    outs = OutputThisElement(outs, table_lines[i])
+outs = AddEmptyLine(outs)
+
+for i in range(15, 20):
+    outs = OutputThisElement(outs, table_lines[i])
+outs = AddEmptyLine(outs)
+
+outs = OutputThisElement(outs, TableSearch(table_lines, "金"))
+outs = OutputThisElement(outs, TableSearch(table_lines, "银"))
+outs = OutputThisElement(outs, TableSearch(table_lines, "铜"))
+outs = OutputThisElement(outs, TableSearch(table_lines, "铁"))
+outs = OutputThisElement(outs, TableSearch(table_lines, "锌"))
+outs = AddEmptyLine(outs)
+
+outs = OutputThisElement(outs, TableSearch(table_lines, "钡"))
+outs = OutputThisElement(outs, TableSearch(table_lines, "铂"))
+outs = OutputThisElement(outs, TableSearch(table_lines, "锰"))
+outs = OutputThisElement(outs, TableSearch(table_lines, "汞"))
+outs = OutputThisElement(outs, TableSearch(table_lines, "碘"))
+outs = AddEmptyLine(outs)
 
 print(outs)
 
