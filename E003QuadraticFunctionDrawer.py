@@ -23,7 +23,16 @@ def DrawAxis(fb, color):
         fb.DrawPoint((int(width/2-1) + i, 0 + i), color)
 
 
+# Convert Vertex Formula to Normal Formula
+def vf2nf(a, h, k):
+    # return a, b, c
+    return a, -2 * a * h, a * h * h + k
+
+
 if __name__ == "__main__":
+    a, b, c = vf2nf(1, 2, 3)
+    print(a, b, c)
+
     fb = FrameBuffer(768, 500)
     fb.Fill((255, 255, 255))
 
