@@ -30,12 +30,31 @@ def vf2nf(a, h, k):
 
 
 if __name__ == "__main__":
-    a, b, c = vf2nf(1, 2, 3)
-    print(a, b, c)
-
-    fb = FrameBuffer(768, 500)
+    fb = FrameBuffer(768, 500, caption="Quadratic Function Drawer")
     fb.Fill((255, 255, 255))
 
     DrawAxis(fb, (0, 0, 0))
 
-    fb.ViewBuffer()
+    mode = input("Please Select Drawing Mode:\n"
+                 "1.Vertex Formula (a, h, k)\n"
+                 "2.Normal Formula (a, b, c)\n")
+
+    if mode == "1":
+        a, h, k = map(float, input("Please Input a, h, k\n"
+                                   "(Use Space to Split)\n").split(" "))
+
+        afunc = lambda a: str(a)
+        hfunc = lambda h: "- " + str(h) if h > 0 else "+ " + str(-1 * h)
+        kfunc = lambda k: "+ " + str(k) if k > 0 else "- " + str(-1 * k)
+
+        print("Got Cha! y =", afunc(a), "( x", hfunc(h), ")²", kfunc(k))
+
+    elif mode == "2":
+        a, b, c = map(float, input("Please input a, b, c\n"
+                                   "(Use Space to Split)\n").split(" "))
+
+        ax2 = lambda a: str(a) + "x²"
+        bx = lambda b: "+ " + str(b) + "x" if b > 0 else "- " + str(-1 * b) + "x"
+        cfunc = lambda c : "+ " + str(c) if c > 0 else "- " + str(-1 * c)
+
+        print("Got Cha! y =", ax2(a), bx(b), cfunc(c))
