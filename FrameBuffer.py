@@ -1,21 +1,40 @@
 import pygame
 from multiprocessing import Process
-from multiprocessing import freeze_support
-# freeze_support()
 
-def BufferViewer(width, height, caption, FrameBufferAddress):
+
+class SurfaceCompatible(pygame.Surface):
+    _pixels_address = None
+
+    def GetOriginalSurface(self):
+        pygame.Surface((super().get_width(), super().get_height()), 0, self)
+
+
+def PickleSurface(yourSurface):
+    return {
+        "Width": yourSurface.get_width(),
+        "Height": yourSurface.get_height(),
+        "Address": yourSurface._pixels_address
+    }
+
+
+def UnpickleSurface(pickledSurface):
+    tmpSurface = SurfaceCompatible((pickledSurface["Width"], pickledSurface["Height"]))
+    tmpSurface._pixels_address = pickledSurface["Address"]
+    return tmpSurface
+
+
+def BufferViewer(width, height, caption, pickledSurface):
     # Create Screen
     Screen = pygame.display.set_mode((width, height))
     pygame.display.set_caption(caption)
-    surfaceTmp = pygame.Surface((1, 1))
-    print(surfaceTmp.__getattribute__)
-    surfaceTmp._pixels_address = FrameBufferAddress
 
+    Surface = UnpickleSurface(pickledSurface)
 
     # Main Loop
     running = True
     while running:
-        Screen.blit(surfaceTmp, (0, 0))
+        Screen.blit(Surface, (0, 0))
+        print(Surface)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
@@ -23,20 +42,18 @@ def BufferViewer(width, height, caption, FrameBufferAddress):
         pygame.display.update()
 
     # Clear the Variables
-    self.Screen = None
+    Screen = None
     return
+
 
 class FrameBuffer:
     def __init__(self, width, height, caption="Frame Buffer"):
-
         self.width = width
         self.height = height
         self.caption = caption
 
         # Create Frame Buffer
-        surfaceTmp = pygame.Surface((width, height))
-        self.FrameBuffer = surfaceTmp
-        self.FrameBufferAddress = surfaceTmp._pixels_address
+        self.FrameBuffer = pygame.Surface((width, height))
 
     def Fill(self, color):
         self.FrameBuffer.fill((color[0], color[1], color[2], 255))
@@ -49,7 +66,15 @@ class FrameBuffer:
         self.FrameBuffer.set_at(position, (color[0], color[1], color[2], 255))
 
     def ViewBuffer(self):
-        p = Process(target=BufferViewer, args=(self.width, self.height, self.caption, self.FrameBufferAddress))
-        freeze_support()
+        p = Process(target=BufferViewer, args=(self.width, self.height, self.caption, PickleSurface(self.FrameBuffer)))
         p.start()
 
+if __name__ == "__main__":
+    a = pygame.Surface((768, 500))
+    a.set_at((100, 100), (123, 134, 145))
+    a.unlock()
+
+    pickledA = PickleSurface(a)
+
+    b = UnpickleSurface(pickledA)
+    print(b.get_at((100, 100)))

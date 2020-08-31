@@ -9,4 +9,5 @@ axis.Point(1, 1)
 for i in numpy.arange(0, 3, 0.01):
     print(i)
     axis.Point(i, i)
-axis.ViewBuffer()
+if __name__ == "__main__":
+    axis.ViewBuffer()
