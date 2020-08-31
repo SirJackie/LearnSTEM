@@ -28,6 +28,28 @@ def usey2getx(y, a, b, c):
         raise ValueError("This Quadratic Functions DOES NOT across y = %s" % y)
         return None, None
 
+def DrawQuadraticFunction(ArgumentDict, axis):
+    CriticalValue = 0.05
+
+    if abs(ArgumentDict["a"]) <= CriticalValue:
+        # Draw With X Axis
+        for x in arange(-1 * axis.zoomedWidth / 2, axis.zoomedWidth / 2, 0.01):
+            axis.Point(x, ArgumentDict["a"] * x * x + ArgumentDict["b"] * x + ArgumentDict["c"])
+
+    elif abs(ArgumentDict["a"]) > CriticalValue:
+        # Draw With Y Axis
+        if ArgumentDict["a"] > 0:
+            for y in arange(ArgumentDict["k"], axis.zoomedHeight / 2, 0.01):
+                x1, x2 = usey2getx(y, ArgumentDict["a"], ArgumentDict["b"], ArgumentDict["c"])
+                axis.Point(x1, y)
+                axis.Point(x2, y)
+
+        elif ArgumentDict["a"] < 0:
+            for y in arange(ArgumentDict["k"], -1 * axis.zoomedHeight / 2, -0.01):
+                x1, x2 = usey2getx(y, ArgumentDict["a"], ArgumentDict["b"], ArgumentDict["c"])
+                axis.Point(x1, y)
+                axis.Point(x2, y)
+
 
 #
 # Main Function
@@ -185,26 +207,7 @@ if __name__ == "__main__":
     # Start Drawing
     #
 
-    CriticalValue = 0.05
-
-    if abs(ArgumentDict["a"]) <= CriticalValue:
-        # Draw With X Axis
-        for x in arange(-1 * axis.zoomedWidth / 2, axis.zoomedWidth / 2, 0.01):
-            axis.Point(x, ArgumentDict["a"] * x * x + ArgumentDict["b"] * x + ArgumentDict["c"])
-
-    elif abs(ArgumentDict["a"]) > CriticalValue:
-        # Draw With Y Axis
-        if ArgumentDict["a"] > 0:
-            for y in arange(ArgumentDict["k"], axis.zoomedHeight / 2, 0.01):
-                x1, x2 = usey2getx(y, ArgumentDict["a"], ArgumentDict["b"], ArgumentDict["c"])
-                axis.Point(x1, y)
-                axis.Point(x2, y)
-
-        elif ArgumentDict["a"] < 0:
-            for y in arange(ArgumentDict["k"], -1 * axis.zoomedHeight / 2, -0.01):
-                x1, x2 = usey2getx(y, ArgumentDict["a"], ArgumentDict["b"], ArgumentDict["c"])
-                axis.Point(x1, y)
-                axis.Point(x2, y)
+    DrawQuadraticFunction(ArgumentDict, axis)
 
     #
     # Show the Result

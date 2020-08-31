@@ -1,6 +1,8 @@
 from FrameBufferAxisSupport import Axis
+from multiprocessing import freeze_support
 import numpy
 
+freeze_support()
 axis = Axis(768, 500, "Axis")
 axis.Clear()
 axis.Point(1, 1)
