@@ -195,8 +195,8 @@ if __name__ == "__main__":
                           ),
         "ScaleVFK": Scale(window,
                           label='k',  # Lable
-                          from_=axis.zoomedHeight/2,  # Minimize Value
-                          to=-1*(axis.zoomedHeight/2),  # Maximize Value
+                          from_=-1*(axis.zoomedHeight/2),  # Minimize Value
+                          to=axis.zoomedHeight/2,  # Maximize Value
                           resolution=0.01,  # Step
                           orient=HORIZONTAL,  # Direction
                           command=CallbackVFK,
