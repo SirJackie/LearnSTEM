@@ -52,8 +52,8 @@ def VF2NF(a, h, k):
 #
 def usey2getx(y, a, b, c):
     try:
-        return (-1 * b + sqrt(b * b - 4 * a * c + 4 * a * y)) / 2 * a, \
-               (-1 * b - sqrt(b * b - 4 * a * c + 4 * a * y)) / 2 * a
+        return (-1 * b + sqrt(b * b - 4 * a * c + 4 * a * y)) / (2 * a), \
+               (-1 * b - sqrt(b * b - 4 * a * c + 4 * a * y)) / (2 * a)  # (2 * a) must have bracket
     except ValueError as e:
         raise ValueError("This Quadratic Functions DOES NOT across y = %s" % y)
         return None, None
@@ -121,6 +121,8 @@ if __name__ == "__main__":
 
     DrawAxis(fb, (0, 0, 0))
 
+    a, b, c, h, k = None, None, None, None, None
+
     # fb.DrawPoint(p(10, 10, fb), (0, 0, 0))
 
     # mode = input("Please Select Drawing Mode:\n"
@@ -131,7 +133,7 @@ if __name__ == "__main__":
     if mode == "1":
         # a, h, k = map(float, input("Please Input a, h, k\n"
         #                            "(Use Space to Split)\n").split(" "))
-        a, h, k = 0.001, 2.0, 3.0
+        a, h, k = -0.1, 0, 0
 
         afunc = lambda a: str(a)
         hfunc = lambda h: "- " + str(h) if h > 0 else "+ " + str(-1 * h)
@@ -153,12 +155,34 @@ if __name__ == "__main__":
 
         a, h, k = NF2VF(a, b, c)
 
+    print(a, b, c)
+
     # Start Drawing
-    if abs(a) <= 1:
+
+    CriticalValue = 0.05
+
+    if abs(a) <= CriticalValue:
         # Draw With X Axis
         for x in range(int(-1 * fb.width / 2), int(fb.width / 2)):
             print(x)
             fb.DrawPoint(p(x, a * x * x + b * x + c, fb), (0, 0, 0))
+
+    elif abs(a) > CriticalValue:
+        # Draw With Y Axis
+        if a > 0:
+            for y in range(int(k), int(fb.height / 2)):
+                x1, x2 = usey2getx(y, a, b, c)
+                print(y, x1, x2)
+                fb.DrawPoint(p(x1, y, fb), (0, 0, 0))
+                fb.DrawPoint(p(x2, y, fb), (0, 0, 0))
+
+        elif a < 0:
+            for y in range(int(k), int(-1 * fb.height/2), -1):
+                x1, x2 = usey2getx(y, a, b, c)
+                print(y, x1, x2)
+                fb.DrawPoint(p(x1, y, fb), (0, 0, 0))
+                fb.DrawPoint(p(x2, y, fb), (0, 0, 0))
+
 
     fb.ViewBuffer()
 
