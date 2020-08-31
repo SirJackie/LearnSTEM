@@ -29,23 +29,23 @@ def usey2getx(y, a, b, c):
         return None, None
 
 def DrawQuadraticFunction(ArgumentDict, axis):
-    CriticalValue = 0.05
+    CriticalValue = 0.8
 
     if abs(ArgumentDict["a"]) <= CriticalValue:
         # Draw With X Axis
-        for x in arange(-1 * axis.zoomedWidth / 2, axis.zoomedWidth / 2, 0.01):
+        for x in arange(-1 * axis.zoomedWidth / 2, axis.zoomedWidth / 2, 0.005):
             axis.Point(x, ArgumentDict["a"] * x * x + ArgumentDict["b"] * x + ArgumentDict["c"])
 
     elif abs(ArgumentDict["a"]) > CriticalValue:
         # Draw With Y Axis
         if ArgumentDict["a"] > 0:
-            for y in arange(ArgumentDict["k"], axis.zoomedHeight / 2, 0.01):
+            for y in arange(ArgumentDict["k"], axis.zoomedHeight / 2, 0.005):
                 x1, x2 = usey2getx(y, ArgumentDict["a"], ArgumentDict["b"], ArgumentDict["c"])
                 axis.Point(x1, y)
                 axis.Point(x2, y)
 
         elif ArgumentDict["a"] < 0:
-            for y in arange(ArgumentDict["k"], -1 * axis.zoomedHeight / 2, -0.01):
+            for y in arange(ArgumentDict["k"], -1 * axis.zoomedHeight / 2, -0.005):
                 x1, x2 = usey2getx(y, ArgumentDict["a"], ArgumentDict["b"], ArgumentDict["c"])
                 axis.Point(x1, y)
                 axis.Point(x2, y)
@@ -57,12 +57,30 @@ def DrawQuadraticFunction(ArgumentDict, axis):
 
 if __name__ == "__main__":
 
+    ArgumentDict = {"a": 1.0,
+                    "h": 0.0,
+                    "k": 0.0,
+                    "b": None,
+                    "c": None
+                    }
+
+    axis = Axis(768, 500, caption="Quadratic Function Drawer")
+    axis.Clear()
+
+    ArgumentDict["a"], ArgumentDict["b"], ArgumentDict["c"] = VF2NF(
+        ArgumentDict["a"],
+        ArgumentDict["h"],
+        ArgumentDict["k"]
+    )
+
+    DrawQuadraticFunction(ArgumentDict, axis)
+    axis.ViewBuffer()
+
     #
     # Initialize FrameBufferAxisSupport
     #
 
-    axis = Axis(768, 500, caption="Quadratic Function Drawer")
-    axis.Clear()
+
 
     #
     # Tkinter Setup
@@ -70,18 +88,8 @@ if __name__ == "__main__":
 
     window = Tk()
 
-    ArgumentDict = {"a": 1.0,
-                    "h": 1.0,
-                    "k": 1.0,
-                    "b": None,
-                    "c": None
-                    }
 
-    ArgumentDict["a"], ArgumentDict["b"], ArgumentDict["c"] = VF2NF(
-        ArgumentDict["a"],
-        ArgumentDict["h"],
-        ArgumentDict["k"]
-    )
+
 
 
     def RefreshArguments(byWhatFormula):
@@ -97,6 +105,11 @@ if __name__ == "__main__":
                 ArgumentDict["h"],
                 ArgumentDict["k"]
             )
+
+        axis.Clear()
+        DrawQuadraticFunction(ArgumentDict, axis)
+        axis.UpdateBuffer()
+
         # ScaleDict["ScaleNFA"].set(ArgumentDict["a"])
         # ScaleDict["ScaleNFB"].set(ArgumentDict["b"])
         # ScaleDict["ScaleNFC"].set(ArgumentDict["c"])
@@ -193,7 +206,7 @@ if __name__ == "__main__":
 
     for i in ScaleDict.values():
         if isinstance(i, Scale):
-            i.set(0)
+            i.set(1)
         i.pack()
 
     window.mainloop()
@@ -201,16 +214,3 @@ if __name__ == "__main__":
     print("-------------")
     print(ArgumentDict)
     print("-------------")
-
-
-    #
-    # Start Drawing
-    #
-
-    DrawQuadraticFunction(ArgumentDict, axis)
-
-    #
-    # Show the Result
-    #
-
-    axis.ViewBuffer()
