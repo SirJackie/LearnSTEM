@@ -1,0 +1,30 @@
+from FrameBuffer import FrameBuffer
+
+
+class Axis(FrameBuffer):
+    def __init__(self, width, height, caption="Frame Buffer"):
+        super().__init__(width, height, caption)
+
+    def Clear(self):
+        super().Fill((255, 255, 255))
+
+        # Draw X Axis
+        for i in range(0, self.width):
+            super().DrawPoint((i, int(self.height / 2 - 1)), (0, 0, 0))
+
+        # Draw Y Axis
+        for i in range(0, self.height):
+            super().DrawPoint((int(self.width / 2 - 1), i), (0, 0, 0))
+
+        # Draw X Arrow
+        for i in range(0, 15):
+            super().DrawPoint((int(self.width - 1) - i, int(self.height / 2 - 1) - i), (0, 0, 0))
+            super().DrawPoint((int(self.width - 1) - i, int(self.height / 2 - 1) + i), (0, 0, 0))
+
+        # Draw Y Arrow
+        for i in range(0, 15):
+            super().DrawPoint((int(self.width / 2 - 1) - i, 0 + i), (0, 0, 0))
+            super().DrawPoint((int(self.width / 2 - 1) + i, 0 + i), (0, 0, 0))
+
+    def Point(self, x, y):
+        super().DrawPoint((int((self.width / 2 - 1) + x), int((self.height / 2 - 1) - y)), (0, 0, 0))

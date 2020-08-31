@@ -1,40 +1,9 @@
-from FrameBuffer import FrameBuffer
+from FrameBufferAxisSupport import Axis
 from math import sqrt
 
 
 #
-# Axis Supporting Functions
-#
-
-def DrawAxis(fb, color):
-    width = fb.width
-    height = fb.height
-
-    # Draw X Axis
-    for i in range(0, width):
-        fb.DrawPoint((i, int(height/2-1)), color)
-
-    # Draw Y Axis
-    for i in range(0, height):
-        fb.DrawPoint((int(width/2-1), i), color)
-
-    # Draw X Arrow
-    for i in range(0, 15):
-        fb.DrawPoint((int(width-1) - i, int(height/2-1) - i), color)
-        fb.DrawPoint((int(width-1) - i, int(height/2-1) + i), color)
-
-    # Draw Y Arrow
-    for i in range(0, 15):
-        fb.DrawPoint((int(width/2-1) - i, 0 + i), color)
-        fb.DrawPoint((int(width/2-1) + i, 0 + i), color)
-
-# Convert Point in Axis Into Point in Screen
-def p(x, y, fb):
-    return int((fb.width / 2 - 1) + x), int((fb.height / 2 - 1) - y)
-
-
-#
-# Converting Functions
+# Quadratic Supporting Functions
 #
 
 # Convert Normal Formula to Vertex Formula
@@ -46,10 +15,7 @@ def VF2NF(a, h, k):
     # return a, b, c
     return a, -2 * a * h, a * h * h + k
 
-
-#
-# Quadratic Supporting Functions
-#
+# Use Y to Get X in Quadratic Function
 def usey2getx(y, a, b, c):
     try:
         return (-1 * b + sqrt(b * b - 4 * a * c + 4 * a * y)) / (2 * a), \
@@ -63,14 +29,19 @@ def usey2getx(y, a, b, c):
 # Unit Test
 #
 
+# Test If Float Is Equal
 def equal(a, b):
     return abs(float(a) - float(b)) < 0.0005
 
+# Unit Test Function
 def UnitTest():
     result = ""
 
 
+    #
     # Test1: VF2NF() and NF2VF()
+    #
+
     a, b, c = 1, 2, 3
     print(a, b, c)
     a, h, k = NF2VF(a, b, c)
@@ -81,7 +52,10 @@ def UnitTest():
         result += "Test1 Rejected\n"
 
 
+    #
     # Test2 : usey2getx()
+    #
+
     a, b, c = VF2NF(1, 0, 0)
     x11, x12 = usey2getx(1, a, b, c)
     x21, x22 = usey2getx(4, a, b, c)
@@ -104,7 +78,10 @@ def UnitTest():
         result += "Test2 Rejected\n"
 
 
+    #
     # Output the Result
+    #
+
     if result == "":
         print("Accepted")
     else:
@@ -116,14 +93,21 @@ def UnitTest():
 #
 
 if __name__ == "__main__":
-    fb = FrameBuffer(768, 500, caption="Quadratic Function Drawer")
-    fb.Fill((255, 255, 255))
 
-    DrawAxis(fb, (0, 0, 0))
+
+    #
+    # Initialize FrameBufferAxisSupport
+    #
+
+    axis = Axis(768, 500, caption="Quadratic Function Drawer")
+    axis.Clear()
+
+
+    #
+    # Get And Calculate a, b, c, h, k
+    #
 
     a, b, c, h, k = None, None, None, None, None
-
-    # fb.DrawPoint(p(10, 10, fb), (0, 0, 0))
 
     # mode = input("Please Select Drawing Mode:\n"
     #              "1.Vertex Formula (a, h, k)\n"
@@ -157,33 +141,37 @@ if __name__ == "__main__":
 
     print(a, b, c)
 
+
+    #
     # Start Drawing
+    #
 
     CriticalValue = 0.05
 
     if abs(a) <= CriticalValue:
         # Draw With X Axis
-        for x in range(int(-1 * fb.width / 2), int(fb.width / 2)):
-            print(x)
-            fb.DrawPoint(p(x, a * x * x + b * x + c, fb), (0, 0, 0))
+        for x in range(int(-1 * axis.width / 2), int(axis.width / 2)):
+            axis.Point(x, a * x * x + b * x + c)
 
     elif abs(a) > CriticalValue:
         # Draw With Y Axis
         if a > 0:
-            for y in range(int(k), int(fb.height / 2)):
+            for y in range(int(k), int(axis.height / 2)):
                 x1, x2 = usey2getx(y, a, b, c)
-                print(y, x1, x2)
-                fb.DrawPoint(p(x1, y, fb), (0, 0, 0))
-                fb.DrawPoint(p(x2, y, fb), (0, 0, 0))
+                axis.Point(x1, y)
+                axis.Point(x2, y)
 
         elif a < 0:
-            for y in range(int(k), int(-1 * fb.height/2), -1):
+            for y in range(int(k), int(-1 * axis.height/2), -1):
                 x1, x2 = usey2getx(y, a, b, c)
-                print(y, x1, x2)
-                fb.DrawPoint(p(x1, y, fb), (0, 0, 0))
-                fb.DrawPoint(p(x2, y, fb), (0, 0, 0))
+                axis.Point(x1, y)
+                axis.Point(x2, y)
 
 
-    fb.ViewBuffer()
+    #
+    # Show the Result
+    #
+
+    axis.ViewBuffer()
 
 
