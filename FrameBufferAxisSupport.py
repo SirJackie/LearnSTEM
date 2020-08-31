@@ -2,8 +2,11 @@ from FrameBuffer import FrameBuffer
 
 
 class Axis(FrameBuffer):
-    def __init__(self, width, height, caption="Frame Buffer"):
+    def __init__(self, width, height, caption="Frame Buffer", zoom=100):
         super().__init__(width, height, caption)
+        self.zoom = zoom
+        self.zoomedWidth = width / zoom
+        self.zoomedHeight = height / zoom
 
     def Clear(self):
         super().Fill((255, 255, 255))
@@ -27,4 +30,13 @@ class Axis(FrameBuffer):
             super().DrawPoint((int(self.width / 2 - 1) + i, 0 + i), (0, 0, 0))
 
     def Point(self, x, y):
-        super().DrawPoint((int((self.width / 2 - 1) + x), int((self.height / 2 - 1) - y)), (0, 0, 0))
+        super().DrawPoint(
+            (
+                int(
+                    (self.width / 2 - 1) + x*self.zoom
+                ),
+                int(
+                    (self.height / 2 - 1) - y*self.zoom
+                )
+            ),
+            (0, 0, 0))
