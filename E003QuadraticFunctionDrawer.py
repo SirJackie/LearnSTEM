@@ -1,5 +1,6 @@
 from FrameBufferAxisSupport import Axis
 from math import sqrt
+from tkinter import *
 
 
 #
@@ -10,10 +11,12 @@ from math import sqrt
 def NF2VF(a, b, c):
     return a, -1 * b / 2 * a, (4 * a * c - b * b) / 4 * a
 
+
 # Convert Vertex Formula to Normal Formula
 def VF2NF(a, h, k):
     # return a, b, c
     return a, -2 * a * h, a * h * h + k
+
 
 # Use Y to Get X in Quadratic Function
 def usey2getx(y, a, b, c):
@@ -26,74 +29,10 @@ def usey2getx(y, a, b, c):
 
 
 #
-# Unit Test
-#
-
-# Test If Float Is Equal
-def equal(a, b):
-    return abs(float(a) - float(b)) < 0.0005
-
-# Unit Test Function
-def UnitTest():
-    result = ""
-
-
-    #
-    # Test1: VF2NF() and NF2VF()
-    #
-
-    a, b, c = 1, 2, 3
-    print(a, b, c)
-    a, h, k = NF2VF(a, b, c)
-    print(a, h, k)
-    a2, b2, c2 = VF2NF(a, h, k)
-    print(a2, b2, c2)
-    if not (equal(a, a2) and equal(b, b2) and equal(c, c2)):
-        result += "Test1 Rejected\n"
-
-
-    #
-    # Test2 : usey2getx()
-    #
-
-    a, b, c = VF2NF(1, 0, 0)
-    x11, x12 = usey2getx(1, a, b, c)
-    x21, x22 = usey2getx(4, a, b, c)
-    x31, x32 = usey2getx(9, a, b, c)
-    x41, x42 = usey2getx(16, a, b, c)
-    x51, x52 = usey2getx(25, a, b, c)
-
-    hasMathAreaError = False
-    try:
-        usey2getx(-5, a, b, c)
-    except ValueError as e:
-        hasMathAreaError = True
-
-    if not(equal(x11, 1.0) and equal(x12, -1.0) and
-           equal(x21, 2.0) and equal(x22, -2.0) and
-           equal(x31, 3.0) and equal(x32, -3.0) and
-           equal(x41, 4.0) and equal(x42, -4.0) and
-           equal(x51, 5.0) and equal(x52, -5.0) and
-           hasMathAreaError is True):
-        result += "Test2 Rejected\n"
-
-
-    #
-    # Output the Result
-    #
-
-    if result == "":
-        print("Accepted")
-    else:
-        print(result)
-
-
-#
 # Main Function
 #
 
 if __name__ == "__main__":
-
 
     #
     # Initialize FrameBufferAxisSupport
@@ -102,44 +41,136 @@ if __name__ == "__main__":
     axis = Axis(768, 500, caption="Quadratic Function Drawer")
     axis.Clear()
 
-
     #
-    # Get And Calculate a, b, c, h, k
+    # Tkinter Setup
     #
 
-    a, b, c, h, k = None, None, None, None, None
+    window = Tk()
 
-    # mode = input("Please Select Drawing Mode:\n"
-    #              "1.Vertex Formula (a, h, k)\n"
-    #              "2.Normal Formula (a, b, c)\n")
-    mode = "1"
+    ArgumentDict = {"a": 1.0,
+                    "h": 0.0,
+                    "k": 0.0,
+                    "b": 0.0,
+                    "c": 0.0}
 
-    if mode == "1":
-        # a, h, k = map(float, input("Please Input a, h, k\n"
-        #                            "(Use Space to Split)\n").split(" "))
-        a, h, k = -0.1, 0, 0
 
-        afunc = lambda a: str(a)
-        hfunc = lambda h: "- " + str(h) if h > 0 else "+ " + str(-1 * h)
-        kfunc = lambda k: "+ " + str(k) if k > 0 else "- " + str(-1 * k)
+    def RefreshArguments(byWhatFormula):
+        if byWhatFormula == "NF":
+            ArgumentDict["a"], ArgumentDict["h"], ArgumentDict["k"] = NF2VF(
+                ArgumentDict["a"],
+                ArgumentDict["b"],
+                ArgumentDict["c"]
+            )
+        elif byWhatFormula == "VF":
+            ArgumentDict["a"], ArgumentDict["b"], ArgumentDict["c"] = VF2NF(
+                ArgumentDict["a"],
+                ArgumentDict["h"],
+                ArgumentDict["k"]
+            )
+        ScaleDict["ScaleNFA"].set(ArgumentDict["a"])
+        ScaleDict["ScaleNFB"].set(ArgumentDict["b"])
+        ScaleDict["ScaleNFC"].set(ArgumentDict["c"])
+        ScaleDict["ScaleVFA"].set(ArgumentDict["a"])
+        ScaleDict["ScaleVFH"].set(ArgumentDict["h"])
+        ScaleDict["ScaleVFK"].set(ArgumentDict["k"])
 
-        print("Got Cha! y =", afunc(a), "( x", hfunc(h), ")²", kfunc(k))
 
-        a, b, c = VF2NF(a, h, k)
+    def CallbackNFA(aString):
+        ArgumentDict["a"] = float(aString)
+        # RefreshArguments("NF")
 
-    elif mode == "2":
-        a, b, c = map(float, input("Please input a, b, c\n"
-                                   "(Use Space to Split)\n").split(" "))
 
-        ax2 = lambda a: str(a) + "x²"
-        bx = lambda b: "+ " + str(b) + "x" if b > 0 else "- " + str(-1 * b) + "x"
-        cfunc = lambda c : "+ " + str(c) if c > 0 else "- " + str(-1 * c)
+    def CallbackNFB(bString):
+        ArgumentDict["b"] = float(bString)
+        # RefreshArguments("NF")
 
-        print("Got Cha! y =", ax2(a), bx(b), cfunc(c))
 
-        a, h, k = NF2VF(a, b, c)
+    def CallbackNFC(cString):
+        ArgumentDict["c"] = float(cString)
+        # RefreshArguments("NF")
 
-    print(a, b, c)
+
+    def CallbackVFA(aString):
+        ArgumentDict["a"] = float(aString)
+        RefreshArguments("VF")
+
+
+    def CallbackVFH(hString):
+        ArgumentDict["h"] = float(hString)
+        RefreshArguments("VF")
+
+
+    def CallbackVFK(kString):
+        ArgumentDict["k"] = float(kString)
+        RefreshArguments("VF")
+
+
+    ScaleDict = {
+        "Label1": Label(window, text="一般式"),
+        "ScaleNFA": Scale(window,
+                          label='a',  # Lable
+                          from_=-3.0,  # Minimize Value
+                          to=3.0,  # Maximize Value
+                          resolution=0.01,  # Step
+                          orient=HORIZONTAL,  # Direction
+                          command=CallbackNFA,
+                          ),
+        "ScaleNFB": Scale(window,
+                          label='b',  # Lable
+                          from_=-200000,  # Minimize Value
+                          to=200000,  # Maximize Value
+                          resolution=1,  # Step
+                          orient=HORIZONTAL,  # Direction
+                          command=CallbackNFB,
+                          ),
+        "ScaleNFC": Scale(window,
+                          label='c',  # Lable
+                          from_=-100000000,  # Minimize Value
+                          to=100000000,  # Maximize Value
+                          resolution=1,  # Step
+                          orient=HORIZONTAL,  # Direction
+                          command=CallbackNFC,
+                          ),
+        "LabelEmpty1": Label(window, text=""),
+        "LabelEmpty2": Label(window, text=""),
+        "Label2": Label(window, text="顶点式"),
+        "ScaleVFA": Scale(window,
+                          label='a',  # Lable
+                          from_=-3.0,  # Minimize Value
+                          to=3.0,  # Maximize Value
+                          resolution=0.01,  # Step
+                          orient=HORIZONTAL,  # Direction
+                          command=CallbackVFA,
+                          ),
+        "ScaleVFH": Scale(window,
+                          label='h',  # Lable
+                          from_=axis.width/2-1,  # Minimize Value
+                          to=-1*(axis.width/2-1),  # Maximize Value
+                          resolution=1,  # Step
+                          orient=HORIZONTAL,  # Direction
+                          command=CallbackVFH,
+                          ),
+        "ScaleVFK": Scale(window,
+                          label='k',  # Lable
+                          from_=axis.height/2-1,  # Minimize Value
+                          to=-1*(axis.height/2-1),  # Maximize Value
+                          resolution=1,  # Step
+                          orient=HORIZONTAL,  # Direction
+                          command=CallbackVFK,
+                          ),
+        "LabelEmpty3": Label(window, text="")
+    }
+
+    for i in ScaleDict.values():
+        if isinstance(i, Scale):
+            i.set(100)
+        i.pack()
+
+    window.mainloop()
+
+    print("-------------")
+    print(ArgumentDict)
+    print("-------------")
 
 
     #
@@ -148,30 +179,27 @@ if __name__ == "__main__":
 
     CriticalValue = 0.05
 
-    if abs(a) <= CriticalValue:
+    if abs(ArgumentDict["a"]) <= CriticalValue:
         # Draw With X Axis
         for x in range(int(-1 * axis.width / 2), int(axis.width / 2)):
-            axis.Point(x, a * x * x + b * x + c)
+            axis.Point(x, ArgumentDict["a"] * x * x + ArgumentDict["b"] * x + ArgumentDict["c"])
 
-    elif abs(a) > CriticalValue:
+    elif abs(ArgumentDict["a"]) > CriticalValue:
         # Draw With Y Axis
-        if a > 0:
-            for y in range(int(k), int(axis.height / 2)):
-                x1, x2 = usey2getx(y, a, b, c)
+        if ArgumentDict["a"] > 0:
+            for y in range(int(ArgumentDict["k"]), int(axis.height / 2)):
+                x1, x2 = usey2getx(y, ArgumentDict["a"], ArgumentDict["b"], ArgumentDict["c"])
                 axis.Point(x1, y)
                 axis.Point(x2, y)
 
-        elif a < 0:
-            for y in range(int(k), int(-1 * axis.height/2), -1):
-                x1, x2 = usey2getx(y, a, b, c)
+        elif ArgumentDict["a"] < 0:
+            for y in range(int(ArgumentDict["k"]), int(-1 * axis.height / 2), -1):
+                x1, x2 = usey2getx(y, ArgumentDict["a"], ArgumentDict["b"], ArgumentDict["c"])
                 axis.Point(x1, y)
                 axis.Point(x2, y)
-
 
     #
     # Show the Result
     #
 
     axis.ViewBuffer()
-
-
