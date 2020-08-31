@@ -18,7 +18,7 @@
 
  16  S   硫  Sulfur
  17  Cl  氯  Chlorlne
- 18  A   氩  Argon
+ 18  Ar  氩  Argon
  19  K   钾  Kalium          (Latin)
  20  Ca  钙  Calcium
 

@@ -15,7 +15,7 @@ table = '''1 H 氢 Hydrogenium Hydrogen
 15 P 磷 Phosphyorum Phosphorus
 16 S 硫 Sulphu Sulfur
 17 Cl 氯 Chlorum Chlorlne
-18 A 氩 Argonum Argon
+18 Ar 氩 Argonum Argon
 19 K 钾 Kalium Potassium
 20 Ca 钙 Calcium Calcium
 21 Sc 钪 Scandium Scandium
