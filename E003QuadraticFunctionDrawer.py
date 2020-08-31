@@ -187,8 +187,8 @@ if __name__ == "__main__":
                           ),
         "ScaleVFH": Scale(window,
                           label='h',  # Lable
-                          from_=axis.zoomedWidth/2,  # Minimize Value
-                          to=-1*(axis.zoomedWidth/2),  # Maximize Value
+                          from_=-1*(axis.zoomedWidth/2),  # Minimize Value
+                          to=axis.zoomedWidth/2,  # Maximize Value
                           resolution=0.01,  # Step
                           orient=HORIZONTAL,  # Direction
                           command=CallbackVFH,
