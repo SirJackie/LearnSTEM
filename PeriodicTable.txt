@@ -1,36 +1,36 @@
-  1  H   氢  Hydrogen
-  2  He  氦  Helium
-  3  Li  锂  Lithium
-  4  Be  铍  Beryllium
-  5  B   硼  Boron
+  1 H   氢  Hydrogen
+  2 He  氦  Helium
+  3 Li  锂  Lithium
+  4 Be  铍  Beryllium
+  5 B   硼  Boron
 
-  6  C   碳  Carbon
-  7  N   氮  Nitrogen
-  8  O   氧  Oxygen
-  9  F   氟  Fluorine
- 10  Ne  氖  Neon
+  6 C   碳  Carbon
+  7 N   氮  Nitrogen
+  8 O   氧  Oxygen
+  9 F   氟  Fluorine
+ 10 Ne  氖  Neon
 
- 11  Na  钠  Natrium         (Latin)
- 12  Mg  镁  Magnesium
- 13  Al  铝  Aluminium
- 14  Si  硅  Silicon
- 15  P   磷  Phosphorus
+ 11 Na  钠  Natrium         (Latin)
+ 12 Mg  镁  Magnesium
+ 13 Al  铝  Aluminium
+ 14 Si  硅  Silicon
+ 15 P   磷  Phosphorus
 
- 16  S   硫  Sulfur
- 17  Cl  氯  Chlorine
- 18  Ar  氩  Argon
- 19  K   钾  Kalium          (Latin)
- 20  Ca  钙  Calcium
+ 16 S   硫  Sulfur
+ 17 Cl  氯  Chlorine
+ 18 Ar  氩  Argon
+ 19 K   钾  Kalium          (Latin)
+ 20 Ca  钙  Calcium
 
- 79  Au  金  Aurum           (Latin)
- 47  Ag  银  Argentum        (Latin)
- 29  Cu  铜  Copper
- 26  Fe  铁  Ferrum          (Latin)
- 30  Zn  锌  Zinc
+ 79 Au  金  Aurum           (Latin)
+ 47 Ag  银  Argentum        (Latin)
+ 29 Cu  铜  Copper
+ 26 Fe  铁  Ferrum          (Latin)
+ 30 Zn  锌  Zinc
 
- 56  Ba  钡  Barium
- 78  Pt  铂  Platinum
- 25  Mn  锰  Manganum
- 80  Hg  汞  Hydrargyrum     (Latin)
- 53  I   碘  Iodine
+ 56 Ba  钡  Barium
+ 78 Pt  铂  Platinum
+ 25 Mn  锰  Manganum
+ 80 Hg  汞  Hydrargyrum     (Latin)
+ 53 I   碘  Iodine
 
