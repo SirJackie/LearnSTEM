@@ -1,6 +1,6 @@
 table = '''1 H 氢 Hydrogenium Hydrogen
 2 He 氦 Helium Helium
-3 Li 锂 Lithum Lithum
+3 Li 锂 Lithum Lithium
 4 Be 铍 Beryllium Beryllium
 5 B 硼 Borium Boron
 6 C 碳 Carbonium Carbon
@@ -14,13 +14,13 @@ table = '''1 H 氢 Hydrogenium Hydrogen
 14 Si 硅 Silicium Silicon
 15 P 磷 Phosphyorum Phosphorus
 16 S 硫 Sulphu Sulfur
-17 Cl 氯 Chlorum Chlorlne
+17 Cl 氯 Chlorum Chlorine
 18 Ar 氩 Argonum Argon
 19 K 钾 Kalium Potassium
 20 Ca 钙 Calcium Calcium
 21 Sc 钪 Scandium Scandium
 22 Ti 钛 Titanium Titanium
-23 V 钡 Vanadium Vanadium
+23 V 钒 Vanadium Vanadium
 24 Cr 铬 Chromium Chromium
 25 Mn 锰 Manganum Manganum
 26 Fe 铁 Ferrum Iron

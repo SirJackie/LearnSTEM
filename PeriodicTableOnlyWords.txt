@@ -1,6 +1,6 @@
 Hydrogen
 Helium
-Lithum
+Lithium
 Beryllium
 Boron
 
@@ -17,7 +17,7 @@ Silicon
 Phosphorus
 
 Sulfur
-Chlorlne
+Chlorine
 Argon
 Kalium
 Calcium
@@ -28,7 +28,7 @@ Copper
 Ferrum
 Zinc
 
-Vanadium
+Barium
 Platinum
 Manganum
 Hydrargyrum
