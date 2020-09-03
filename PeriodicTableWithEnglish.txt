@@ -1,0 +1,36 @@
+Hydrogen
+Helium
+Lithium
+Beryllium
+Boron
+
+Carbon
+Nitrogen
+Oxygen
+Fluorine
+Neon
+
+Natrium         (Latin)
+Magnesium
+Aluminum
+Silicon
+Phosphorus
+
+Sulfur
+Chlorine
+Argon
+Kalium          (Latin)
+Calcium
+
+Aurum           (Latin)
+Argentum        (Latin)
+Copper
+Ferrum          (Latin)
+Zinc
+
+Barium
+Platinum
+Manganese
+Hydrargyrum     (Latin)
+Iodine
+

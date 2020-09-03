@@ -32,48 +32,80 @@ def LineupSpaces(content_before_spaces, spaces_and_content_total_length):
 # Element Outputting Functions
 #
 
-def Element(element):
+def Element(element, serial=True, symbol=True, chinese=True, english=True):
     result = ""
 
     # Add Serial Number
-    result += "%3d" % int(element[0])
-    result += Spaces(1)
+    if serial is True:
+        result += "%3d" % int(element[0])
+        result += Spaces(1)
 
     # Add Symbol of Element
-    result += element[1] + LineupSpaces(element[1], 3)
-    result += Spaces(1)
+    if symbol is True:
+        result += element[1] + LineupSpaces(element[1], 3)
+        result += Spaces(1)
 
     # Add Chinese Name
-    result += element[2] + LineupSpaces(element[2], 2)
-    result += Spaces(1)
+    if chinese is True:
+        result += element[2] + LineupSpaces(element[2], 2)
+        result += Spaces(1)
 
     # Add Latin/English Name
-    judger = lambda: element[4] if element[4][0].lower() == element[1][0].lower() else element[3] + LineupSpaces(element[3], 16) + "(Latin)"
-    result += judger()
-    result += "\n"
+    if english is True:
+        judger = lambda: element[4] if element[4][0].lower() == element[1][0].lower() else element[3] + LineupSpaces(element[3], 16) + "(Latin)"
+        result += judger()
+        result += "\n"
 
     return result
 
 
-# def ElementWithOnlyLatinOrEnglishName(element):
-#     result = ""
-#
-#     # Add Latin/English Name
-#     result += lambda: element[4] if element[4][0].lower() == element[1][0].lower() else element[3] + LineupSpaces(element[3], 16) + "(Latin)"
-#     result += "\n"
-#
-#     return result
-
-
-def SearchOnTable(table, chinese_name):
+def SearchOnTable(table, chinese_name, serial=True, symbol=True, chinese=True, english=True):
     index_of_element = [table[i][0] for i in range(0, len(table)) if table[i][2] == chinese_name]
     index_of_element = int(index_of_element[0]) - 1
-    return Element(table[index_of_element])
+    return Element(table[index_of_element], serial=serial, symbol=symbol, chinese=chinese, english=english)
 
 
-# def SearchOnTableWithOnlyLatinOrEnglishName(table, chinese_name):
-#     index_of_element = table[i][0] for i in range(0, len(table)) if table[i][2] == chinese_name
-#     return ElementWithOnlyLatinOrEnglishName(table[index_of_element])
+#
+# Selecting Functions
+#
+def ElementsIWant(table, serial=True, symbol=True, chinese=True, english=True):
+    result = ""
+
+    for i in range(0, 5):
+        result += Element(table[i], serial=serial, symbol=symbol, chinese=chinese, english=english)
+    result += "\n"
+
+    for i in range(5, 10):
+        result += Element(table[i], serial=serial, symbol=symbol, chinese=chinese, english=english)
+    result += "\n"
+
+    for i in range(10, 15):
+        result += Element(table[i], serial=serial, symbol=symbol, chinese=chinese, english=english)
+    result += "\n"
+
+    for i in range(15, 20):
+        result += Element(table[i], serial=serial, symbol=symbol, chinese=chinese, english=english)
+    result += "\n"
+
+    result += SearchOnTable(table, "金", serial=serial, symbol=symbol, chinese=chinese, english=english)
+    result += SearchOnTable(table, "银", serial=serial, symbol=symbol, chinese=chinese, english=english)
+    result += SearchOnTable(table, "铜", serial=serial, symbol=symbol, chinese=chinese, english=english)
+    result += SearchOnTable(table, "铁", serial=serial, symbol=symbol, chinese=chinese, english=english)
+    result += SearchOnTable(table, "锌", serial=serial, symbol=symbol, chinese=chinese, english=english)
+    result += "\n"
+
+    result += SearchOnTable(table, "钡", serial=serial, symbol=symbol, chinese=chinese, english=english)
+    result += SearchOnTable(table, "铂", serial=serial, symbol=symbol, chinese=chinese, english=english)
+    result += SearchOnTable(table, "锰", serial=serial, symbol=symbol, chinese=chinese, english=english)
+    result += SearchOnTable(table, "汞", serial=serial, symbol=symbol, chinese=chinese, english=english)
+    result += SearchOnTable(table, "碘", serial=serial, symbol=symbol, chinese=chinese, english=english)
+    result += "\n"
+
+    print(result)
+
+    return result
+
+
 
 
 #
@@ -82,77 +114,16 @@ def SearchOnTable(table, chinese_name):
 
 if __name__ == "__main__":
     table = GetTable("E002OriginPeriodicTableRaw.txt")
-    # result_with_only_latin_or_english_name = ""
-    #
-    # for i in range(0, 5):
-    #     result_with_only_latin_or_english_name += ElementWithOnlyLatinOrEnglishName(table[i])
-    # result_with_only_latin_or_english_name += "\n"
-    #
-    # for i in range(5, 10):
-    #     result_with_only_latin_or_english_name += ElementWithOnlyLatinOrEnglishName(table[i])
-    # result_with_only_latin_or_english_name += "\n"
-    #
-    # for i in range(10, 15):
-    #     result_with_only_latin_or_english_name += ElementWithOnlyLatinOrEnglishName(table[i])
-    # result_with_only_latin_or_english_name += "\n"
-    #
-    # for i in range(15, 20):
-    #     result_with_only_latin_or_english_name += ElementWithOnlyLatinOrEnglishName(table[i])
-    # result_with_only_latin_or_english_name += "\n"
-    #
-    # result_with_only_latin_or_english_name += SearchOnTableWithOnlyLatinOrEnglishName(table, "金")
-    # result_with_only_latin_or_english_name += SearchOnTableWithOnlyLatinOrEnglishName(table, "银")
-    # result_with_only_latin_or_english_name += SearchOnTableWithOnlyLatinOrEnglishName(table, "铜")
-    # result_with_only_latin_or_english_name += SearchOnTableWithOnlyLatinOrEnglishName(table, "铁")
-    # result_with_only_latin_or_english_name += SearchOnTableWithOnlyLatinOrEnglishName(table, "锌")
-    # result_with_only_latin_or_english_name += "\n"
-    #
-    # result_with_only_latin_or_english_name += SearchOnTableWithOnlyLatinOrEnglishName(table, "钡")
-    # result_with_only_latin_or_english_name += SearchOnTableWithOnlyLatinOrEnglishName(table, "铂")
-    # result_with_only_latin_or_english_name += SearchOnTableWithOnlyLatinOrEnglishName(table, "锰")
-    # result_with_only_latin_or_english_name += SearchOnTableWithOnlyLatinOrEnglishName(table, "汞")
-    # result_with_only_latin_or_english_name += SearchOnTableWithOnlyLatinOrEnglishName(table, "碘")
-    # result_with_only_latin_or_english_name += "\n"
-    #
-    # print(result_with_only_latin_or_english_name)
-    #
-    # with open("PeriodicTableWithOnlyLatinOrEnglishName.txt", "wb") as f:
-    #     f.write(result_with_only_latin_or_english_name.encode(encoding="utf-8"))
 
-    result = ""
-
-    for i in range(0, 5):
-        result += Element(table[i])
-    result += "\n"
-
-    for i in range(5, 10):
-        result += Element(table[i])
-    result += "\n"
-
-    for i in range(10, 15):
-        result += Element(table[i])
-    result += "\n"
-
-    for i in range(15, 20):
-        result += Element(table[i])
-    result += "\n"
-
-    result += SearchOnTable(table, "金")
-    result += SearchOnTable(table, "银")
-    result += SearchOnTable(table, "铜")
-    result += SearchOnTable(table, "铁")
-    result += SearchOnTable(table, "锌")
-    result += "\n"
-
-    result += SearchOnTable(table, "钡")
-    result += SearchOnTable(table, "铂")
-    result += SearchOnTable(table, "锰")
-    result += SearchOnTable(table, "汞")
-    result += SearchOnTable(table, "碘")
-    result += "\n"
-
-    print(result)
+    result = ElementsIWant(table)
+    result_with_english = ElementsIWant(table, serial=False, symbol=False, chinese=False)
+    result_with_chinese = ElementsIWant(table, serial=False, symbol=False, english=False)
 
     with open("PeriodicTable.txt", "wb") as f:
         f.write(result.encode(encoding="utf-8"))
 
+    with open("PeriodicTableWithEnglish.txt", "wb") as f:
+        f.write(result_with_english.encode(encoding="utf-8"))
+
+    with open("PeriodicTableWithChinese.txt", "wb") as f:
+        f.write(result_with_chinese.encode(encoding="utf-8"))

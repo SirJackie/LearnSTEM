@@ -10,7 +10,7 @@
 10 Ne 氖 Neonum Neon
 11 Na 钠 Natrium Sodium
 12 Mg 镁 Magnesium Magnesium
-13 Al 铝 Aluminium Aluminium
+13 Al 铝 Aluminium Aluminum
 14 Si 硅 Silicium Silicon
 15 P 磷 Phosphyorum Phosphorus
 16 S 硫 Sulphu Sulfur

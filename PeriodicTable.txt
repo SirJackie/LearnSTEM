@@ -12,7 +12,7 @@
 
  11 Na  钠  Natrium         (Latin)
  12 Mg  镁  Magnesium
- 13 Al  铝  Aluminium
+ 13 Al  铝  Aluminum
  14 Si  硅  Silicon
  15 P   磷  Phosphorus
 
@@ -30,7 +30,7 @@
 
  56 Ba  钡  Barium
  78 Pt  铂  Platinum
- 25 Mn  锰  Manganum
+ 25 Mn  锰  Manganese
  80 Hg  汞  Hydrargyrum     (Latin)
  53 I   碘  Iodine
 
