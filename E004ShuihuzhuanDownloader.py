@@ -53,10 +53,7 @@ def GetArticleContent(result):
     return middle_result
 
 
-if __name__ == "__main__":
-    url = input("Input Article URL: ")
-    # url = "https://www.ppzuowen.com/book/shuihuchuanbaihuawen/10695.html"
-
+def DownloadShuihuArticle(number, url):
     r = requests.get(url)
     result = r.content.decode("gb2312", "ignore")
 
@@ -64,10 +61,47 @@ if __name__ == "__main__":
     print(title)
 
     article_content = GetArticleContent(result)
-    print(article_content)
+    # print(article_content)
 
-    with open(title + ".txt", "wb") as f:
+    with open(str(number) + ". " + title + ".txt", "wb") as f:
         f.write(str(title + "\n" + article_content).encode("utf-8"))
 
     print("Download Succeed")
 
+def GetBookList():
+    r = requests.get("https://www.ppzuowen.com/book/shuihuchuanbaihuawen/")
+
+    # Get The Content
+    result = r.content.decode("gb2312", "ignore")
+
+    # Get The Book List
+    result = result.split('<ul class="bookList">\n        ')[1].split("\n      </ul>")[0]
+
+    # Delete '<li> <a href=' from string
+    result = ''.join(result.split('<li> <a href='))
+
+    # Delete ' class="title" target="_blank">' from string
+    result = ''.join(result.split(' class="title" target="_blank">'))
+
+    # Delete '</a> </li>' from string
+    result = ''.join(result.split('</a> </li>'))
+
+    # Create A List
+    result = result.split('"')
+
+    # print(result)
+    return result
+
+def GetChapterLength(bookList):
+    return int((len(bookList)-1)/2)
+
+def GetSpecificChapterInformation(bookList, index):
+    return bookList[index * 2 + 1], bookList[index * 2 + 2]
+
+if __name__ == "__main__":
+    BookList = GetBookList()
+    length = GetChapterLength(BookList)
+    for i in range(0, length):
+        chapterInformation = GetSpecificChapterInformation(BookList, i);
+        print(i, ":", chapterInformation)
+        DownloadShuihuArticle(i+1, "https://www.ppzuowen.com" + chapterInformation[0])
